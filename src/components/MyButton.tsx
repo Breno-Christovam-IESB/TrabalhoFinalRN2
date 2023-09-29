@@ -1,31 +1,46 @@
 import React from "react";
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import styled from "styled-components/native";
 
 
-interface IMyProps {
-    title: String;
-    color?: string;
-  }
+type Props = {
+  buttonColor: string;
+  labelColor: string;
+  title: string;
+  activeOpacity: number;
+  onPress: () =>  void;
+};
 
-const MyButtton = (params: IMyProps) => {
+const Touchable = styled.TouchableOpacity<{color: string}>`
+background-color: ${props => props.color};
+height: 50px;
+border-radius: 16px;
+justify-content: center;
+`;
+
+/* margin-top: 32px; */
+
+const Label = styled.Text<{color: string}>`
+  color: ${props => props.color};
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+  `;
+
+  const MyButton = ({
+    buttonColor,
+    labelColor,
+    title,
+    onPress,
+    activeOpacity,
+  }: Props) => {
     return (
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.label}>{params.title}</Text>
-      </TouchableOpacity>
+      <Touchable
+        color={buttonColor}
+        activeOpacity={activeOpacity}
+        onPress={onPress}>
+        <Label color={labelColor}>{title}</Label>
+      </Touchable>
     );
   };
 
-  export default MyButtton;
-
-  const styles = StyleSheet.create({
-    button: {
-        height: 45,
-        backgroundColor: 'black',
-        width: 130,
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      label: {
-        color: 'red',
-      }
-  });
+  export default MyButton;
