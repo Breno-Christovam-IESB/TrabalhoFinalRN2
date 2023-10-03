@@ -1,12 +1,10 @@
 import {useNavigation} from '@react-navigation/native';
 import React from "react";
-import {ScrollView, Text, TouchableOpacity} from "react-native";
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {ScrollView, Alert, SafeAreaView} from "react-native";
 import styled from "styled-components/native";
-import WelcomeImage from '../../assets/images/wlecome_image.png'
+import WelcomeImage from '../../assets/images/welcome_image.png';
 import MyButton from '../components/MyButton';
-import {Alert} from 'react-native';
-import Login from '../screens/login'
+
 
 type TextProps = {
     color: string;
@@ -30,8 +28,8 @@ const LogoImage = styled.Image`
 const ContentWrapper = styled.View`
     background-color: #b22222;
     flex: 0.3;
-    border-top-left-radius: 30px;
-    border-top-right-radius:30px;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
     padding: 16px;
 `;
 
@@ -44,7 +42,7 @@ const Title = styled.Text<TextProps>`
     font-size: 32px;
     color: ${props => props.color};
     text-align: center;
-    margin: 24px 4px 0 4px;
+    margin: 24px 24px 0 24px;
 `;
 
 const Subtitle = styled.Text`
@@ -56,17 +54,12 @@ const Subtitle = styled.Text`
 `;
 
 const Home = () => {
-    const {navigate} = useNavigation();
+    const { navigate } = useNavigation();
     return (
-       /* <Container>
-            <TouchableOpacity onPress={() => navigate('Webnavigator')}>
-                <Text>Click here</Text>
-            </TouchableOpacity>
-        </Container> */
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
             <SafeAreaView />
             <ImageWrapper>
-                <LogoImage source={WelcomeImage} resizeMode="contain"/>
+                <LogoImage source={WelcomeImage} resizeMode="contain" />
             </ImageWrapper>
             <ContentWrapper>
                 <Row>
@@ -76,13 +69,11 @@ const Home = () => {
                 <Subtitle>A melhor solução para compras online.</Subtitle>
                 <MyButton
                     activeOpacity={0.3}
-                    buttonColor='black'
-                    labelColor='white'
-                    title='Começar a comprar!'
-                    onPress={() =>
-                        navigate('Login')
-                        //Alert.alert('Ola', 'Este é o componente de Botão')
-                        }
+                    buttonColor="black"
+                    labelColor="orange"
+                    title="Começar a comprar!"
+                    onPress={() => navigate('Login')}
+                        //Alert.alert('Ola', 'Este é o componente de Botão')                       
                       />
             </ContentWrapper>
         </ScrollView>

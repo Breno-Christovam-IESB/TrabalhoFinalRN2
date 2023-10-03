@@ -27,11 +27,11 @@ const ActivityIndicatorWrapper = styled.View<{backgroundColor: string}>`
 const Loading = (props: IProps) => (
     <Modal transparent={true} animationType="fade" visible={props.isLoading}>
         <ModalContainer>
-            <ActivityIndicatorWrapper backgroundColor={props.backgroundColor}>
+            <ActivityIndicatorWrapper background-color={props.backgroundColor}>
                 <ActivityIndicator animating={props.isLoading} color={props.loadingColor} size="large" />
             </ActivityIndicatorWrapper>
         </ModalContainer>
     </Modal>
 );
 
-//export default Loading;
+export default Loading;

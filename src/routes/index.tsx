@@ -7,7 +7,10 @@ import Login from "../screens/login";
 import HomePage from "../screens/homepage";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import OrderList from "../screens/orderlist";
+import Setting from "../screens/setting";
+import { SignUp } from "../screens/signup";
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { KeyboardAvoidingView, TouchableWithoutFeedback } from "react-native";
 
 
 type RootStackParamsList = {
@@ -28,7 +31,7 @@ declare global {
 const HomeStack = createNativeStackNavigator();
 const HomeStackScreen = () => (
     <HomeStack.Navigator>
-        <HomeStack.Screen name="HomeScreen" component={HomePage} options={{
+        <HomeStack.Screen name="Home" component={Home} options={{
             headerTitle: '',
             headerTintColor: 'white',
             headerTransparent: true,
@@ -37,18 +40,51 @@ const HomeStackScreen = () => (
 );
 // <HomeStack.Screen name="ProductDetails" component={ProductDetailsPage} /
 
+const LoginStack = createNativeStackNavigator();
+const LoginStackScreen = () => (
+    <LoginStack.Navigator>
+        <LoginStack.Screen name="Login" component={Login} options={{
+            headerTitle: '',
+            headerTintColor: 'white',
+            headerTransparent: true,
+        }} />       
+    </LoginStack.Navigator>
+);
+
+const HomePageStack = createNativeStackNavigator();
+const HomePageStackScreen = () => (
+    <HomePageStack.Navigator>
+        <HomePageStack.Screen name="HomePage" component={HomePage} options={{
+            headerTitle: '',
+            headerTintColor: 'white',
+            headerTransparent: true,
+        }} />       
+    </HomePageStack.Navigator>
+);
+
 const OrderStack = createNativeStackNavigator();
 const OrderStackScreen = () => (
     <OrderStack.Navigator>
-        <OrderStack.Screen name="OrderListScreen" component={OrderList} />
+    <OrderStack.Screen name="OrderList" component={OrderList} />
     </OrderStack.Navigator>
 );
 
 const SettingStack = createNativeStackNavigator();
 const SettingStackScreen = () => (
     <SettingStack.Navigator>
-        <SettingStack.Screen name="OrderListScreen" component={OrderList} />
+    <SettingStack.Screen name="SettingList" component={Setting} />
     </SettingStack.Navigator>
+);
+
+const SignUpStack = createNativeStackNavigator();
+const SignUpStackScreen = () => (
+    <SignUpStack.Navigator>
+        <SignUpStack.Screen name="SignUp" component={SignUp} options={{
+            headerTitle: '',
+            headerTintColor: 'white',
+            headerTransparent: true,
+        }} />       
+    </SignUpStack.Navigator>
 );
 
 const Tab = createBottomTabNavigator();
@@ -58,11 +94,20 @@ const TabBarIcon = props => {
 
     let iconName;
 
-    if (name === 'HomePage') {
+    if (name === 'Home') {
     iconName = focused ? 'home' : 'home-outline';
-} else if (name === 'Compras') {
+    } else if (name === 'Login') {
+    iconName = focused ? 'person' : 'person-outline';
+    } 
+    else if (name === 'HomePage') {
+    iconName = focused ? 'homepage' : 'home-outline';
+    } 
+    else if (name === 'SignUp') {
+    iconName = focused ? 'reader' : 'reader-outline';
+    } 
+     else if (name === 'Compras') {
     iconName = focused ? 'list' : 'list-outline';
-} else if (name === 'Ajustes') {
+    } else if (name === 'Ajustes') {
     iconName = focused ? 'settings' : 'settings-outline';
 }
 
@@ -79,9 +124,12 @@ const Routes = () => (
             tabBarInactiveTintColor: 'gray',
             })}>
 
-            <Tab.Screen name="HomePage" component={HomeStackScreen} />
-            <Tab.Screen name="Compras" component={OrderStackScreen} />
-            <Tab.Screen name="Ajustes" component={HomeStackScreen} />
+            <Tab.Screen name="Home" component={HomeStackScreen} />
+            <Tab.Screen name="Compras" component={OrderList} />
+            <Tab.Screen name="Login" component={LoginStackScreen} />
+            <Tab.Screen name="SignUp" component={SignUpStackScreen} />
+            <Tab.Screen name="Ajustes" component={Setting} />
+
         </Tab.Navigator>
 
         {/*<Stack.Navigator initialRouteName="Home">
