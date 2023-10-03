@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from "../screens/home";
-import Webnavigator from "../screens/webnavigator";
+import Webnavigator from "../screens/WebNavigator";
 import Login from "../screens/login";
 import HomePage from "../screens/homepage";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';

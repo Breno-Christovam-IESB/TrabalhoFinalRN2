@@ -33,11 +33,13 @@
 
 // export default App;
 
-import React from "react";
 //import {View, SafeAreaView, Text, StyleSheet} from 'react-native';
-import {SafeAreaView} from 'react-native';
 import WebView from "react-native-webview";
 import styled from 'styled-components/native';
+import React from "react";
+import { Button, SafeAreaView } from "react-native";
+
+
 
 const htmlContent = `
   <!DOCTYPE html>
