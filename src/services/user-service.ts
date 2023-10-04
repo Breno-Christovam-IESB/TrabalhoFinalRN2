@@ -1,5 +1,5 @@
 import api from "./api";
-import {IUserResponse, ILoginUser} from '../common/user-interface'
+import {IUserResponse, ILoginUser, ISignUpUser} from '../common/user-interface'
 
 export const fetchUsers = async(): Promise<IUserResponse> => {
     const response = await api.get<IUserResponse>('/read-user');
@@ -9,4 +9,4 @@ export const fetchUsers = async(): Promise<IUserResponse> => {
 export const login = async(user: ILoginUser): Promise<Number> => {
     const response = await api.post('/login-user', user);
     return response.status;
-}
+};

@@ -100,7 +100,7 @@ const TabBarIcon = props => {
     iconName = focused ? 'person' : 'person-outline';
     } 
     else if (name === 'HomePage') {
-    iconName = focused ? 'homepage' : 'home-outline';
+    iconName = focused ? 'home' : 'home-outline';
     } 
     else if (name === 'SignUp') {
     iconName = focused ? 'reader' : 'reader-outline';
@@ -125,10 +125,16 @@ const Routes = () => (
             })}>
 
             <Tab.Screen name="Home" component={HomeStackScreen} />
-            <Tab.Screen name="Compras" component={OrderList} />
+            <Tab.Screen name="Compras" component={OrderStackScreen} />
             <Tab.Screen name="Login" component={LoginStackScreen} />
             <Tab.Screen name="SignUp" component={SignUpStackScreen} />
-            <Tab.Screen name="Ajustes" component={Setting} />
+            <Tab.Screen name="Ajustes" component={SettingStackScreen} />
+            <Tab.Screen name="HomePage" component={HomePageStackScreen} options={{
+            tabBarButton: () => null,
+            tabBarStyle: {
+            display: 'none',
+          },
+        }} />
 
         </Tab.Navigator>
 

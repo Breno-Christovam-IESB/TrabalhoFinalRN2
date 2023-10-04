@@ -13,15 +13,15 @@ export function Input({
     value,
     ...rest }:
     InputProps) {
-        const [isFocused, setIsFocused] = useState(false);
-        const [isFilled, setIsFilled] = useState(false);
+        const [isFocused, setIsFocused] = useState(false); //Se está em focus.
+        const [isFilled, setIsFilled] = useState(false); //Se está preenchido.
 
         function handleInputFocus() {
             setIsFocused(true);
         }
         function handleInputBlur() {
             setIsFocused(false);
-            setIsFilled(!!value)
+            setIsFilled(!!value) //Se está preenchido ou focused retorna estado de cor. Modificando a cor do icone dando um pouco mais de detalhes visuais ao usuário.(o input selecionado muda a cor do icon.)
         }
         return (
             <Container >
