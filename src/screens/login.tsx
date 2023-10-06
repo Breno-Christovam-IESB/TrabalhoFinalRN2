@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Alert, SafeAreaView, ScrollView, StatusBar} from 'react-native';
 import styled from 'styled-components/native';
 
-import WelcomeImage from '../../assets/images/welcome_image.png';
+import WelcomeImage from '../assets/images/welcome_image.png';
 import {login} from '../services/user-service';
 import {ILoginUser} from '../common/user-interface';
 import {useNavigation} from '@react-navigation/native';

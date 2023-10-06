@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React from "react";
 import {ScrollView, Alert, SafeAreaView} from "react-native";
 import styled from "styled-components/native";
-import WelcomeImage from '../../assets/images/welcome_image.png';
+import WelcomeImage from '../assets/images/welcome_image.png';
 import MyButton from '../components/MyButton';
 
 

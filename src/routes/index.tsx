@@ -5,6 +5,8 @@ import Home from "../screens/home";
 import Webnavigator from "../screens/WebNavigator";
 import Login from "../screens/login";
 import HomePage from "../screens/homepage";
+import DetailsPro from "../screens/details/detailspro";
+import ProductsView from "../components/productsview";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import OrderList from "../screens/orderlist";
 import Setting from "../screens/setting";
@@ -18,6 +20,8 @@ type RootStackParamsList = {
     Webnavigator: undefined;
     Login: undefined;
     HomePage: undefined;
+    DetailsPro: undefined;
+    ProductsView: undefined;
 };
 
 // const Stack = createNativeStackNavigator();
@@ -62,6 +66,17 @@ const HomePageStackScreen = () => (
     </HomePageStack.Navigator>
 );
 
+const ProductsViewStack = createNativeStackNavigator();
+const ProductsViewStackScreen = () => (
+    <ProductsViewStack.Navigator>
+        <ProductsViewStack.Screen name="ProductsView" component={ProductsView} options={{
+            headerTitle: '',
+            headerTintColor: 'white',
+            headerTransparent: true,
+        }} />       
+    </ProductsViewStack.Navigator>
+);
+
 const OrderStack = createNativeStackNavigator();
 const OrderStackScreen = () => (
     <OrderStack.Navigator>
@@ -74,6 +89,17 @@ const SettingStackScreen = () => (
     <SettingStack.Navigator>
     <SettingStack.Screen name="SettingList" component={Setting} />
     </SettingStack.Navigator>
+);
+
+const DetailsStack = createNativeStackNavigator();
+const DetailsStackScreen = () => (
+    <DetailsStack.Navigator>
+        <DetailsStack.Screen name="DetailsPro" component={DetailsPro} options={{
+            headerTitle: '',
+            headerTintColor: 'white',
+            headerTransparent: true,
+        }} />       
+    </DetailsStack.Navigator>
 );
 
 const SignUpStack = createNativeStackNavigator();
@@ -105,7 +131,13 @@ const TabBarIcon = props => {
     else if (name === 'SignUp') {
     iconName = focused ? 'reader' : 'reader-outline';
     } 
-     else if (name === 'Compras') {
+    else if (name === 'DetailsPro') {
+    iconName = focused ? 'reader' : 'reader-outline';
+    } 
+    else if (name === 'ProductsView') {
+    iconName = focused ? 'reader' : 'reader-outline';
+    } 
+    else if (name === 'Compras') {
     iconName = focused ? 'list' : 'list-outline';
     } else if (name === 'Ajustes') {
     iconName = focused ? 'settings' : 'settings-outline';
@@ -125,17 +157,38 @@ const Routes = () => (
             })}>
 
             <Tab.Screen name="Home" component={HomeStackScreen} />
-            <Tab.Screen name="Compras" component={OrderStackScreen} />
+            <Tab.Screen name="Compras" component={OrderStackScreen}  options={{
+            tabBarButton: () => null,
+            tabBarStyle: {
+            display: 'none',
+          },
+        }}/>
             <Tab.Screen name="Login" component={LoginStackScreen} />
             <Tab.Screen name="SignUp" component={SignUpStackScreen} />
-            <Tab.Screen name="Ajustes" component={SettingStackScreen} />
+            <Tab.Screen name="Ajustes" component={SettingStackScreen}  options={{
+            tabBarButton: () => null,
+            tabBarStyle: {
+            display: 'none',
+          },
+        }}  />
             <Tab.Screen name="HomePage" component={HomePageStackScreen} options={{
             tabBarButton: () => null,
             tabBarStyle: {
             display: 'none',
           },
         }} />
-
+        <Tab.Screen name="DetailsPro" component={DetailsStackScreen} options={{
+            tabBarButton: () => null,
+            tabBarStyle: {
+            display: 'none',
+          },
+        }} />
+        <Tab.Screen name="ProductsView" component={ProductsViewStackScreen} options={{
+            tabBarButton: () => null,
+            tabBarStyle: {
+            display: 'none',
+          },
+        }} />
         </Tab.Navigator>
 
         {/*<Stack.Navigator initialRouteName="Home">

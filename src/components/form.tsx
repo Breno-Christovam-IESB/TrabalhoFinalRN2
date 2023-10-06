@@ -6,7 +6,6 @@ import { Input } from '../components/input';
 import { ISignUpUser } from '../common/user-interface';
 import { useNavigation } from '@react-navigation/native';
 import {signup} from '../services/createuser-service';
-import Loading from '../components/loading';
 
 
 
