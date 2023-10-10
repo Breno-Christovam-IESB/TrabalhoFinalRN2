@@ -1,30 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
+import styled from 'styled-components/native';
 import { ItemProps } from '../common/item-interface';
 import ProductsView from '../components/productsview';
 import DescriptionSession from '../components/descriptionsession';
 import useProducts from '../services/products';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
+import { Button } from '../components/button';
 
 
-export default function HomePage() {
+export default function HomePage () {
     const navigation = useNavigation();
-    const getProducts = useProducts();
-    const isFocused = useIsFocused();
-    const [product, setProduct] = useState<ItemProps[]>([]);
-
-    useEffect(() => {
-        if(!isFocused) {
-            setProduct([]);
-            getProducts.remove();
-        }
-    }, [isFocused]);
-    useEffect(() => {
-        if (getProducts.data) {
-            setProduct(getProducts.data);
-        }
-    }, [getProducts.data]);
 
     return (
         <View style={styles.container}>
@@ -33,18 +20,18 @@ export default function HomePage() {
             style={styles.image}
             />
             <View style={styles.textContainer}>
-                <Text style={styles.text}>Produtos</Text>
-                <Text style={styles.text}>em</Text>
+                <Text style={{ marginTop: 10, color: 'white', fontSize: 30, fontFamily: 'Anton_400Regular'}}>Produtos </Text>
+                <Text style={{ marginTop: 20, color: 'white', fontSize: 30, fontFamily: 'Anton_400Regular'}}>em </Text>
                 <Text style={styles.text}>Promoção</Text>                
-            <TouchableOpacity style={{position: 'absolute', right: 0, alignSelf: 'center'}}>
+                <ButtonCart onPress={() => navigation.navigate('OrderList')}>
                 <AntDesign
                 name="shoppingcart"
-                size={30}
+                size={60}
                 color="white"
                 />
-            </TouchableOpacity>
+            </ButtonCart>
             </View>
-            <View style={styles.line} />
+            <View style={styles.line}/>
             <ProductsView/>
             </View>
             <ProductsView/>
@@ -57,6 +44,10 @@ export default function HomePage() {
     );
 };
 
+
+const ButtonCart = styled.TouchableOpacity`
+`;
+
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -64,6 +55,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'black'
     },
     header:{
+        marginBottom: 8
+    },
+    button:{
+        position: 'absolute',
+        right: 0,
+        alignSelf: 'center',
         marginBottom: 8
     },
     image:{
@@ -77,14 +74,14 @@ const styles = StyleSheet.create({
     },
     text:{
         fontFamily: 'Anton_400Regular',
-        fontSize: 26,
+        fontSize: 30,
         marginHorizontal: '1%',
         marginVertical: '1%',
+        marginTop: '10%',
         color: 'white'
     },
     line:{
         borderBottomColor: '#d8d8d8',
         borderBottomWidth: 2,
     }
-
 });

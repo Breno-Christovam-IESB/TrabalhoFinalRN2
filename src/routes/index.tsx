@@ -1,41 +1,43 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from "../screens/home";
+import {Home} from "../screens/home";
 import Webnavigator from "../screens/WebNavigator";
 import Login from "../screens/login";
 import HomePage from "../screens/homepage";
-import DetailsPro from "../screens/details/detailspro";
+import {DetailsPro} from "../screens/details/detailspro";
 import ProductsView from "../components/productsview";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import OrderList from "../screens/orderlist";
+import {OrderList} from "../screens/orderlist";
 import Setting from "../screens/setting";
 import { SignUp } from "../screens/signup";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { KeyboardAvoidingView, TouchableWithoutFeedback } from "react-native";
+import { ItemProps } from "../common/item-interface";
 
-
-type RootStackParamsList = {
+ export type RootStackParamList = {
     Home: undefined;
     Webnavigator: undefined;
     Login: undefined;
     HomePage: undefined;
-    DetailsPro: undefined;
     ProductsView: undefined;
-};
+    OrderList: undefined;
+    DetailsPro: undefined;
+}
 
 // const Stack = createNativeStackNavigator();
 
-declare global {
+ declare global {
     namespace ReactNavigation {
-        interface RootParamsList extends RootStackParamsList {}       
+        interface RootParamList extends RootStackParamList {
+        }       
     }
 }
 
 const HomeStack = createNativeStackNavigator();
 const HomeStackScreen = () => (
     <HomeStack.Navigator>
-        <HomeStack.Screen name="Home" component={Home} options={{
+        <HomeStack.Screen name="HomeStack" component={Home} options={{
             headerTitle: '',
             headerTintColor: 'white',
             headerTransparent: true,
@@ -66,21 +68,25 @@ const HomePageStackScreen = () => (
     </HomePageStack.Navigator>
 );
 
-const ProductsViewStack = createNativeStackNavigator();
-const ProductsViewStackScreen = () => (
-    <ProductsViewStack.Navigator>
-        <ProductsViewStack.Screen name="ProductsView" component={ProductsView} options={{
-            headerTitle: '',
-            headerTintColor: 'white',
-            headerTransparent: true,
-        }} />       
-    </ProductsViewStack.Navigator>
-);
+// const ProductsViewStack = createNativeStackNavigator();
+// const ProductsViewStackScreen = () => (
+//     <ProductsViewStack.Navigator>
+//         <ProductsViewStack.Screen name="ProductsView" component={ProductsView} options={{
+//             headerTitle: '',
+//             headerTintColor: 'white',
+//             headerTransparent: true,
+//         }} />       
+//     </ProductsViewStack.Navigator>
+// );
 
 const OrderStack = createNativeStackNavigator();
 const OrderStackScreen = () => (
     <OrderStack.Navigator>
-    <OrderStack.Screen name="OrderList" component={OrderList} />
+    <OrderStack.Screen name="OrderList" component={OrderList} options={{
+            headerTitle: '',
+            headerTintColor: 'white',
+            headerTransparent: true,
+        }} />
     </OrderStack.Navigator>
 );
 
@@ -91,16 +97,15 @@ const SettingStackScreen = () => (
     </SettingStack.Navigator>
 );
 
-const DetailsStack = createNativeStackNavigator();
-const DetailsStackScreen = () => (
-    <DetailsStack.Navigator>
-        <DetailsStack.Screen name="DetailsPro" component={DetailsPro} options={{
-            headerTitle: '',
-            headerTintColor: 'white',
-            headerTransparent: true,
-        }} />       
-    </DetailsStack.Navigator>
-);
+// const DetailsStack = createNativeStackNavigator();
+// const DetailsStackScreen = () => (
+//     <DetailsStack.Navigator>
+//         <DetailsStack.Screen name="DetailsProStack" component={DetailsPro} options={{
+//             headerTintColor: 'white',
+//             headerTransparent: true,
+//         }} />       
+//     </DetailsStack.Navigator>
+// );
 
 const SignUpStack = createNativeStackNavigator();
 const SignUpStackScreen = () => (
@@ -116,7 +121,7 @@ const SignUpStackScreen = () => (
 const Tab = createBottomTabNavigator();
 
 const TabBarIcon = props => {
-    const {focused, name, color, size} = props;
+    const {focused, name, color, size, item} = props;
 
     let iconName;
 
@@ -137,11 +142,11 @@ const TabBarIcon = props => {
     else if (name === 'ProductsView') {
     iconName = focused ? 'reader' : 'reader-outline';
     } 
-    else if (name === 'Compras') {
+    else if (name === 'OrderList') {
     iconName = focused ? 'list' : 'list-outline';
     } else if (name === 'Ajustes') {
     iconName = focused ? 'settings' : 'settings-outline';
-}
+    }
 
 return <Ionicons name={iconName} size={size} color={color} />
 }
@@ -154,10 +159,9 @@ const Routes = () => (
             tabBarIcon: props => <TabBarIcon {...props} name={route.name} />,
             tabBarActiveTintColor: '#62C567',
             tabBarInactiveTintColor: 'gray',
-            })}>
-
+        })}>
             <Tab.Screen name="Home" component={HomeStackScreen} />
-            <Tab.Screen name="Compras" component={OrderStackScreen}  options={{
+            <Tab.Screen name="OrderList" component={OrderStackScreen}  options={{
             tabBarButton: () => null,
             tabBarStyle: {
             display: 'none',
@@ -177,28 +181,28 @@ const Routes = () => (
             display: 'none',
           },
         }} />
-        <Tab.Screen name="DetailsPro" component={DetailsStackScreen} options={{
+         <Tab.Screen name="ProductsView" component={ProductsView} options={{
+                tabBarButton: () => null,
+                tabBarStyle: {
+                display: 'none',
+                },
+            }} 
+            />
+            <Tab.Screen name="DetailsPro" component={DetailsPro} options={{
             tabBarButton: () => null,
             tabBarStyle: {
             display: 'none',
           },
-        }} />
-        <Tab.Screen name="ProductsView" component={ProductsViewStackScreen} options={{
+        }}/>
+        {/* <Tab.Screen name="ProductsView" component={ProductsViewStackScreen} options={{
             tabBarButton: () => null,
             tabBarStyle: {
             display: 'none',
           },
-        }} />
+        }} /> */}
         </Tab.Navigator>
 
-        {/*<Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name= "Home" component={Home} />
-            <Stack.Screen name= "Webnavigator" component={Webnavigator} />
-            <Stack.Screen name= "Login" component={Login} options={{
-                headerShown: false,
-            }}/>
-            <Stack.Screen name='HomePage' component={HomePage} />
-        </Stack.Navigator>*/}
+
     </NavigationContainer>
 );
 

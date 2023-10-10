@@ -8,9 +8,9 @@ export interface ItemProps {
     quantity?: number;
     price: number;
     isFetching: boolean;
-}
+};
 
 export interface ICategory {
     id: number;
     name: string;
-}
+};

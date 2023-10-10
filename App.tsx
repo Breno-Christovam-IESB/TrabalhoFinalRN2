@@ -8,7 +8,14 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Anton_400Regular } from '@expo-google-fonts/anton';
 import { StatusBar } from 'expo-status-bar';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+//redux persist
+//import {PersistGate} from 'redux-persist/integration/react';
+//import {persistStore} from 'redux-persist';
+//redux
+//import {Provider} from 'react-redux';
 
+//import {store} from './src/redux/store';
+//let persistor = persistStore(store);
 
 const queryClient = new QueryClient()
 

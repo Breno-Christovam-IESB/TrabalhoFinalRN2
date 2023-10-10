@@ -38,11 +38,18 @@ flex-direction: row;
 justify-content: center;
 `;
 
-const Title = styled.Text<TextProps>`
+const TitleCompras = styled.Text<TextProps>`
     font-size: 32px;
-    color: ${props => props.color};
     text-align: center;
     margin: 24px 24px 0 24px;
+    color: #ffd700;
+`;
+
+const TitleOnline = styled.Text<TextProps>`
+    font-size: 32px;
+    text-align: center;
+    margin: 24px 24px 0 24px;
+    color: #7fff00;
 `;
 
 const Subtitle = styled.Text`
@@ -63,8 +70,8 @@ const Home = () => {
             </ImageWrapper>
             <ContentWrapper>
                 <Row>
-                <Title color="#ffd700">Compras</Title>
-                <Title color="#00ff7f">Online</Title>
+                <TitleCompras>Compras</TitleCompras>
+                <TitleOnline>Online</TitleOnline>
                 </Row>
                 <Subtitle>A melhor solução para compras online.</Subtitle>
                 <MyButton
@@ -80,4 +87,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export {Home};

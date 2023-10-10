@@ -5,26 +5,28 @@ import useProducts from '../services/products';
 import styled from "styled-components/native";
 import {Platform} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation, useRoute, RouteProp} from '@react-navigation/native';
 import EmptyList from '../components/emptylist';
+import { RootStackParamList } from "../routes";
+
 
 export default function ProductsView() {
     const navigation = useNavigation();
     const [items, setItems] = useState<ItemProps[]>([]);
     const isFocused = useIsFocused();
-    const products = useProducts();
+    const getProducts = useProducts();
 
-    useEffect(() => {
+    React.useEffect(() => {
       if(!isFocused) {
         setItems([]);
-          products.remove();
+        getProducts.remove();
       }
   }, [isFocused]);
-  useEffect(() => {
-      if (products.data) {
-          setItems(products.data);
+    React.useEffect(() => {
+      if (getProducts.data) {
+          setItems(getProducts.data);
       }
-  }, [products.data]);
+  }, [getProducts.data]);
 
     return (
         <Container>
@@ -34,30 +36,26 @@ export default function ProductsView() {
         keyExtractor={item => item._id}
         numColumns={2}
         renderItem={({item}) => (
-           <ProductContainer
-           onPress={(): void => navigation.navigate('DetailsPro', {item})}>
-            <ProductsImage source={{
+          <ProductContainer
+            onPress={() => navigation.navigate('DetailsPro', { item })}>
+            <ProductsImage
+              source={{
                 uri: item.imageUrl,
-            }}
+              }}
             />
             <ProductInfo>
-                <ProductPrice>R$:{item.price}</ProductPrice>
+                <ProductPrice>R${item.price}</ProductPrice>
                 <ProductTitle>{item.name}</ProductTitle>
                 <ProductUnit>{item.unit}</ProductUnit>
             </ProductInfo>
             </ProductContainer>    
     )}
-    ListEmptyComponent={() => {
-        return products.isFetching ? (
-            <Text>Aguarde...</Text>
-        ) : (
-            <EmptyList message="Ops! Algo deu errado, tente novamente." />
-        );
-    }}
     />
         </Container>
     );
 };
+
+export {ProductsView}
 
 const Container = styled(SafeAreaView)`
   flex: 1;
