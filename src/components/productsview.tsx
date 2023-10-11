@@ -36,19 +36,19 @@ export default function ProductsView() {
         keyExtractor={item => item._id}
         numColumns={2}
         renderItem={({item}) => (
-          <ProductContainer
+          <ContainerProduct
             onPress={() => navigation.navigate('DetailsPro', { item })}>
-            <ProductsImage
+            <ImageProducts
               source={{
                 uri: item.imageUrl,
               }}
             />
-            <ProductInfo>
-                <ProductPrice>R${item.price}</ProductPrice>
-                <ProductTitle>{item.name}</ProductTitle>
-                <ProductUnit>{item.unit}</ProductUnit>
-            </ProductInfo>
-            </ProductContainer>    
+            <InfoPorducts>
+                <TitleProducts>{item.name}</TitleProducts>
+                <PriceProducts>R${item.price}</PriceProducts>
+                <UnitProducts>1 {item.unit}</UnitProducts>
+            </InfoPorducts>
+            </ContainerProduct>    
     )}
     />
         </Container>
@@ -63,48 +63,48 @@ const Container = styled(SafeAreaView)`
   padding-top: 10px;
 `;
 
-const ProductContainer = styled.TouchableOpacity`
+const ContainerProduct = styled.TouchableOpacity`
+  background-color: #ededed;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
   width: 100%;
   max-width: 180px;
-  background-color: #ededed;
-  padding: 32px 0;
-  margin-bottom: 16px;
-  border: 5px solid #d9d9d9;
-  border-radius: 8px;
+  padding: 30px 0;
+  margin-bottom: 14px;
+  border: 5px solid red;
+  border-radius: 10px;
 `;
 
-const ProductsImage = styled.Image`
+const ImageProducts = styled.Image`
   width: 100px;
   height: 95px;
   border-radius: 10px;
 `;
 
-const ProductInfo = styled.View`
+const InfoPorducts = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
 
-const ProductTitle = styled.Text`
+const TitleProducts = styled.Text`
   color: black;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
 `;
 
-const ProductPrice = styled.Text`
+const PriceProducts = styled.Text`
   color: black;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 400;
 `;
 
-const ProductUnit = styled.Text`
+const UnitProducts = styled.Text`
   color: black;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 400;
 `;
 
 const FlatList = styled.FlatList<ItemProps>`
