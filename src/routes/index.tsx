@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from "../screens/home";
@@ -12,8 +12,7 @@ import { OrderList } from "../screens/orderlist";
 import Setting from "../screens/setting";
 import { SignUp } from "../screens/signup";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { KeyboardAvoidingView, TouchableWithoutFeedback } from "react-native";
-import { ItemProps } from "../common/item-interface";
+import messaging from '@react-native-firebase/messaging';
 
  export type RootStackParamList = {
     Home: undefined;
@@ -152,7 +151,16 @@ const TabBarIcon = props => {
 return <Ionicons name={iconName} size={size} color={color} />
 }
 
-const Routes = () => (
+const Routes = () => {
+    useEffect(() => {
+        async function getUserToken() {
+            await messaging().registerDeviceForRemoteMessages();
+            const token = await messaging().getToken();
+            console.log(`>>>> ${token}`);
+        }
+        getUserToken();
+    }, [])
+    return (
     <NavigationContainer>
         <Tab.Navigator
             screenOptions={({route}) => ({
@@ -205,6 +213,6 @@ const Routes = () => (
 
 
     </NavigationContainer>
-);
+)};
 
 export default Routes;
