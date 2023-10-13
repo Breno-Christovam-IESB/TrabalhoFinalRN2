@@ -13,6 +13,8 @@ import Setting from "../screens/setting";
 import { SignUp } from "../screens/signup";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import messaging from '@react-native-firebase/messaging';
+import PushNotification from 'react-native-push-notification';
+
 
  export type RootStackParamList = {
     Home: undefined;
@@ -160,6 +162,15 @@ const Routes = () => {
         }
         getUserToken();
     }, [])
+    useEffect(() => {
+        messaging().onMessage(async remoteMessage => {
+          PushNotification.localNotification({
+            title: remoteMessage!.notification!.title,
+            message: remoteMessage!.notification?.body,
+          });
+        });
+      }, []);
+
     return (
     <NavigationContainer>
         <Tab.Navigator
