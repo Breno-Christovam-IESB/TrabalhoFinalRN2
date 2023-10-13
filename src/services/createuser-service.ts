@@ -1,5 +1,5 @@
 //import {useMutation, UseMutationResults} from 'react-query';
-import api from '../services/api';
+import {api} from 'http-module';
 import {IUserResponse, ILoginUser, ISignUpUser} from '../common/user-interface'
 
 

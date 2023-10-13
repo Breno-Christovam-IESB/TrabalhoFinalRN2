@@ -1,14 +1,14 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Home} from "../screens/home";
+import { Home } from "../screens/home";
 import Webnavigator from "../screens/WebNavigator";
 import Login from "../screens/login";
 import HomePage from "../screens/homepage";
-import {DetailsPro} from "../screens/details/detailspro";
+import { DetailsPro } from "../screens/details/detailspro";
 import ProductsView from "../components/productsview";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {OrderList} from "../screens/orderlist";
+import { OrderList } from "../screens/orderlist";
 import Setting from "../screens/setting";
 import { SignUp } from "../screens/signup";
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -30,6 +30,7 @@ import { ItemProps } from "../common/item-interface";
  declare global {
     namespace ReactNavigation {
         interface RootParamList extends RootStackParamList {
+
         }       
     }
 }

@@ -1,4 +1,4 @@
-import api from '../services/api';
+import {api} from 'http-module';
 import { ItemProps } from '../common/item-interface';
 import { UseBaseQueryResult, useQuery } from 'react-query';
 
